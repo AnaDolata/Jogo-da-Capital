@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Locale;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,11 +41,13 @@ public class MainActivity extends AppCompatActivity {
         cidade = capitais[index];
 
         state.setText(estado);
+        findViewById(R.id.button2).setVisibility(View.INVISIBLE);
     }
 
     public void guess(View view){
         capitalInput = findViewById(R.id.editTextCapital);
         String capital = String.valueOf(capitalInput.getText());
+        capital = capital.toLowerCase();
 
         if((capital).equals(cidade)){
             pontos += 10;
@@ -52,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         }else{
             output.setText("Errou a capital! A correta é " + cidade + "\n" + String.valueOf(pontos) + " pontos");
         }
+        findViewById(R.id.button).setVisibility(View.INVISIBLE);
+        findViewById(R.id.button2).setVisibility(View.VISIBLE);
         capitalInput.setText("");
         rodada++;
         visibleButtons();
@@ -64,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         cidade = capitais[index];
 
         state.setText(estado);
+        output.setText("\n" + String.valueOf(pontos) + " pontos");
+        findViewById(R.id.button).setVisibility(View.VISIBLE);
+        findViewById(R.id.button2).setVisibility(View.INVISIBLE);
     }
 
     public void visibleButtons(){
